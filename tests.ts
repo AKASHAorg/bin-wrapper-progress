@@ -15,6 +15,7 @@ describe('Wrapper', function () {
     });
 
     beforeEach(function (done) {
+        wrapperInstance.downloadProgress.removeAllListeners(events.DOWNLOAD_PROGRESS);
         rimraf(binTarget, function () {
             done();
         });
@@ -25,7 +26,7 @@ describe('Wrapper', function () {
             expect(stats).to.have.property('total');
             expect(stats).to.have.property('completed');
             expect(stats).to.have.property('resource');
-            if (stats.total === stats.completed) {
+            if (stats.total === stats.completed.toString()) {
                 done();
             }
         });
@@ -45,7 +46,7 @@ describe('Wrapper', function () {
             expect(stats).to.have.property('total');
             expect(stats).to.have.property('completed');
             expect(stats).to.have.property('resource');
-            if (stats.total === stats.completed) {
+            if (stats.total === stats.completed.toString()) {
                 done();
             }
         });
