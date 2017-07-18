@@ -11,7 +11,7 @@ describe('Wrapper', function () {
     this.timeout(90000);
     before(function () {
         wrapperInstance = new Wrapper().src(source('1.2.2'), 'linux', 'x64')
-            .dest(binTarget).use('fs-repo-migrations/fs-repo-migrations');
+            .dest(binTarget).use('fs-repo-migrations');
     });
 
     beforeEach(function (done) {
