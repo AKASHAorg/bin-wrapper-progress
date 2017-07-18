@@ -1,6 +1,6 @@
 {
   "name": "@akashaproject/bin-wrapper-progress",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "bin-wrapper with download progress",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/chai": "4.0.1",
     "@types/mocha": "2.2.41",
-    "@types/node": "8.0.13",
+    "@types/node": "8.0.14",
     "@types/rimraf": "0.0.28",
     "chai": "4.1.0",
     "coveralls": "2.13.1",
