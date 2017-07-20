@@ -26,7 +26,7 @@ describe('Wrapper', function () {
             expect(stats).to.have.property('total');
             expect(stats).to.have.property('completed');
             expect(stats).to.have.property('resource');
-            if (stats.total === stats.completed.toString()) {
+            if (stats.total === stats.completed) {
                 done();
             }
         });
@@ -46,7 +46,7 @@ describe('Wrapper', function () {
             expect(stats).to.have.property('total');
             expect(stats).to.have.property('completed');
             expect(stats).to.have.property('resource');
-            if (stats.total === stats.completed.toString()) {
+            if (stats.total === stats.completed) {
                 done();
             }
         });

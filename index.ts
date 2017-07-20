@@ -27,7 +27,12 @@ export default class Wrapper extends BinWrapper {
             downloads.push(
                 download(file.url, destination, { extract: true, strip: 1 })
                     .on('response', res => {
-                        const progress = { total: res.headers['content-length'], completed: 0, resource: file.url };
+                        const total = res.headers['content-length'];
+                        const progress = {
+                            total: parseInt(Array.isArray(total) ? total[0] : total, 10) ,
+                            completed: 0,
+                            resource: file.url
+                        };
                         this._progress.emit(events.DOWNLOAD_PROGRESS, progress);
                         res.on('data', data => {
                             progress.completed += data.length;
