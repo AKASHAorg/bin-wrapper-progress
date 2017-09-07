@@ -1,6 +1,6 @@
 {
   "name": "@akashaproject/bin-wrapper-progress",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "bin-wrapper with download progress",
   "main": "index.js",
   "scripts": {
