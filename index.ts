@@ -36,11 +36,11 @@ export default class Wrapper {
         this._src.push({
             url: src,
             os: os,
-            arch: arch
+            arch: arch,
         });
 
         return this;
-    };
+    }
 
     public dest(dest?: string) {
         if (!arguments.length) {
@@ -49,7 +49,7 @@ export default class Wrapper {
 
         this._dest = dest;
         return this;
-    };
+    }
 
     public use(bin?: string) {
         if (!arguments.length) {
@@ -58,7 +58,7 @@ export default class Wrapper {
 
         this._use = bin;
         return this;
-    };
+    }
 
     public version(range?: string) {
         if (!arguments.length) {
@@ -67,11 +67,11 @@ export default class Wrapper {
 
         this._version = range;
         return this;
-    };
+    }
 
     public path() {
         return path.join(this.dest(), this.use());
-    };
+    }
 
     public run(cmd, cb) {
         if (typeof cmd === 'function' && !cb) {
@@ -91,10 +91,10 @@ export default class Wrapper {
             }
 
             return this.runCheck(cmd)
-                .then(()=> cb())
-                .catch((err)=> cb(err));
+              .then(() => cb())
+              .catch((err) => cb(err));
         });
-    };
+    }
 
     public runCheck(cmd) {
         return binCheck(this.path(), cmd).then((works) => {
@@ -136,23 +136,23 @@ export default class Wrapper {
         const downloads = [];
         files.forEach((file) => {
             downloads.push(
-                download(file.url, destination, { extract: true, strip: this._opts.strip })
-                    .on('response', res => {
-                        const total = res.headers['content-length'];
-                        const progress = {
-                            total: parseInt(Array.isArray(total) ? total[0] : total, 10),
-                            completed: 0,
-                            resource: file.url
-                        };
+              download(file.url, destination, { extract: true, strip: this._opts.strip })
+                .on('response', res => {
+                    const total = res.headers['content-length'];
+                    const progress = {
+                        total: parseInt(Array.isArray(total) ? total[0] : total, 10),
+                        completed: 0,
+                        resource: file.url,
+                    };
+                    this._progress.emit(events.DOWNLOAD_PROGRESS, progress);
+                    res.on('data', data => {
+                        progress.completed += data.length;
                         this._progress.emit(events.DOWNLOAD_PROGRESS, progress);
-                        res.on('data', data => {
-                            progress.completed += data.length;
-                            this._progress.emit(events.DOWNLOAD_PROGRESS, progress);
-                        });
-                    })
-                    .on('error', error => {
-                        this._progress.emit(events.DOWNLOAD_ERROR, error);
-                    })
+                    });
+                })
+                .on('error', error => {
+                    this._progress.emit(events.DOWNLOAD_ERROR, error);
+                }),
             );
         });
 

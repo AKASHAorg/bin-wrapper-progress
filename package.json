@@ -23,23 +23,23 @@
   },
   "homepage": "https://github.com/AkashaProject/bin-wrapper-progress#readme",
   "devDependencies": {
-    "@types/chai": "4.1.3",
-    "@types/mocha": "5.2.0",
-    "@types/node": "10.1.0",
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.6",
+    "@types/node": "11.9.4",
     "@types/rimraf": "2.0.2",
-    "chai": "4.1.2",
-    "coveralls": "3.0.1",
+    "chai": "4.2.0",
+    "coveralls": "3.0.2",
     "istanbul": "0.4.5",
-    "mocha": "5.1.1",
+    "mocha": "6.0.0",
     "mocha-lcov-reporter": "1.3.0",
-    "rimraf": "2.6.2",
-    "standard-version": "4.3.0",
-    "tslint": "5.10.0",
-    "typescript": "2.8.3"
+    "rimraf": "2.6.3",
+    "standard-version": "5.0.0",
+    "tslint": "5.12.1",
+    "typescript": "3.3.3"
   },
   "dependencies": {
     "bin-check": "^4.1.0",
-    "bin-version-check": "^3.0.0",
+    "bin-version-check": "^4.0.0",
     "download": "^7.0.0",
     "os-filter-obj": "^2.0.0"
   }
