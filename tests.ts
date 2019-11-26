@@ -2,15 +2,18 @@ import * as path from 'path';
 import * as rimraf from 'rimraf';
 import { expect } from 'chai';
 import Wrapper, { events } from './index';
+const os = require('os');
 
 const binTarget = path.join(__dirname, 'bin');
+const platform = os.platform();
+
 let wrapperInstance;
-const source = (version) => `https://dist.ipfs.io/fs-repo-migrations/v${version}/fs-repo-migrations_v${version}_linux-amd64.tar.gz`;
+const source = (version) => `https://dist.ipfs.io/fs-repo-migrations/v${version}/fs-repo-migrations_v${version}_${platform}-amd64.tar.gz`;
 
 describe('Wrapper', function () {
     this.timeout(90000);
     before(function () {
-        wrapperInstance = new Wrapper().src(source('1.2.2'), 'linux', 'x64')
+        wrapperInstance = new Wrapper().src(source('1.4.0'), platform, 'x64')
             .dest(binTarget).use('fs-repo-migrations');
     });
 
@@ -57,7 +60,7 @@ describe('Wrapper', function () {
     });
 
     it('should throw error when platform is not supported', function (done) {
-        wrapperInstance = new Wrapper().src(source('1.2.2'), 'win32', 'x64')
+        wrapperInstance = new Wrapper().src(source('1.4.0'), 'win32', 'x64')
             .dest(binTarget).use('fs-repo-migrations/fs-repo-migrations');
 
         wrapperInstance.run(['-v'], function (err) {
@@ -67,7 +70,7 @@ describe('Wrapper', function () {
     })
 
     it('should throw error when source doest not exist', function (done) {
-        wrapperInstance = new Wrapper().src(source('1.2.2') + '1231', 'win32', 'x64')
+        wrapperInstance = new Wrapper().src(source('1.4.0') + '1231', 'win32', 'x64')
             .dest(binTarget).use('fs-repo-migrations/fs-repo-migrations');
 
         wrapperInstance.run(['-v'], function (err) {
